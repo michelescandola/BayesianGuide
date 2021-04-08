@@ -1,0 +1,147 @@
+---
+title: "Guida Bayesiana per Autostoppisti"
+author: "Michele Scandola"
+date: "30/4/2021"
+output:
+  ioslides_presentation:
+    incremental: true
+    widescreen: true
+bibliography: biblio.bib
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+# Presentazione preparata da Michele Scandola per il webinar
+# della Società Italiana di PsicoFisiologia e neuroscienze cognitive (SIPF)
+# del 30 aprile 2021
+# 
+# Licenza afl-3.0
+
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Cosa è la statistica Bayesiana?
+
+- Le origini: Bayes & Laplace
+- $P(\theta|D) \propto P(D|\theta) \times P(\theta)$
+- Distribuzione a priori $P(\theta)$ p $P(H)$:
+  distribuzione di probabilità dell'ipotesi o dei parametri
+  in forma di distribuzione dei dati.
+  _Come credo saranno distribuiti i dati._
+- Funzione di verosomiglianza (likelihood) $P(D|\theta)$ o $P(D|H)$:
+  distribuzione di probabilità dei dati tramite modello.
+  _Come sono realmente distribuiti i dati._
+- Distribuzione a posteriori $P(\theta|D)$ o $P(H|D)$:
+  distribuzione di probabilità dell'ipotesi o dei parametri dopo
+  l'osservazione dei dati.
+  _Come cambia la mia ipotesi di distribuzione dei dati._
+  
+## Un esempio 1/4 - modificato da [@Albert2009]
+
+- Eseguiamo su un singolo partecipante un test composto
+  da 30 prove diverse.
+
+- Le prove sono abbastanza difficili, ma non sappiamo quanto.
+  Ci aspettiamo un andamento 50/50
+
+```{r, fig.height=3}
+curve(dbeta(x,15+1,15+1),add=FALSE,
+        lty=3,lwd=4, col = "green",
+        xlab="percentuale di successo",
+        ylab="Density", axes = FALSE)
+abline(v = 15/30, col = "grey")
+axis(side = 1, at = seq(from = 0, to = 1, by = 0.1),
+       labels = paste0(seq(from = 0, to = 100, by = 10), "%"))
+```
+
+- Distribuzione a-priori $P(\theta) \sim \mathcal{B}(15+1,15+1)$
+
+## Un esempio 2/4 - modificato da [@Albert2009]
+
+- Per ogni prova eseguita
+  abbiamo il dato di accuratezza (1 = successo, 0 = fallimento).
+
+- Il nostro partecipante riesce in 10 prove, ma ne sbaglia 10.
+
+```{r, fig.height=3}
+successes <- 10##33%
+failures  <- 20##77%
+curve(dbeta(x,successes+1,failures+1),add=FALSE,lty=2,lwd=4,
+        col = "blue",
+        xlab="percentuale di successo",
+        ylab="Density", axes = FALSE)
+abline(v = 10/30, col = "red")
+abline(v = 15/30, col = "grey")
+axis(side = 1, at = seq(from = 0, to = 1, by = 0.1),
+       labels = paste0(seq(from = 0, to = 100, by = 10), "%"))
+```
+
+- Funzione di verosomiglianza $P(D|\theta) \sim \mathcal{B}(10+1,20+1)$
+
+## Un esempio 3/4 - modificato da [@Albert2009]
+
+- Combinando la nostra aspettativa con i dati,
+  la nostra aspettativa cambia...
+
+```{r, fig.height=3}
+successes <- 10##33%
+failures  <- 20##77%
+curve(dbeta(x,15+successes,15+failures), from=0, to=1,
+        xlab="percentuale di successo",
+        ylab="Density",lty=1,lwd=4, ylim = c(0,10),
+        axes = FALSE, col = "red")
+abline(v = 10/30, col = "red")
+abline(v = 15/30, col = "grey")
+axis(side = 1, at = seq(from = 0, to = 1, by = 0.1),
+       labels = paste0(seq(from = 0, to = 100, by = 10), "%"))
+```
+
+- Distribuzione a posteriori $P(\theta|D) \sim \mathcal{B}(15+10,15+20)$
+
+## Un esempio 4/4 - modificato da [@Albert2009]
+
+```{r, fig.height=1}
+renderPlot({
+  a0 <- as.numeric(input$a)
+  b0 <- 30 - a0
+  
+  successes <- 10##33%
+  failures  <- 20##77%
+  
+  ## posterior
+  curve(dbeta(x,a0+successes,b0+failures), from=0, to=1,
+        xlab="percentuale di successo",
+        ylab="Density",lty=1,lwd=4, ylim = c(0,10),
+        axes = FALSE, col = "red")
+  ## likelihood
+  curve(dbeta(x,successes+1,failures+1),add=TRUE,lty=2,lwd=4,
+        col = "blue")
+  ## prior
+  curve(dbeta(x,a0,b0),add=TRUE,lty=3,lwd=4, col = "green")
+  legend(.7,10,c("Prior","Likelihood","Posterior"),
+         lty=c(3,2,1),lwd=c(3,3,3),col=c("green","blue","red"))
+  axis(side = 1, at = seq(from = 0, to = 1, by = 0.1),
+       labels = paste0(seq(from = 0, to = 100, by = 10), "%"))
+})
+
+inputPanel(
+  sliderInput("a", label = "Distribuzione a-priori dei successi:",
+              min = 0, max = 30, value = 15, step = 1)
+)
+```
+
+
+## Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## R Output
+
+```{r cars}
+summary(cars)
+```
+
+## References
