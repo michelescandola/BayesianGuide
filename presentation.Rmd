@@ -1,11 +1,15 @@
 ---
 title: "Guida Bayesiana per Autostoppisti"
+subtitle: "SNACK SIPF 30/04/2021"
 author: "Michele Scandola"
-date: "30/4/2021"
+date: "NPSY-Lab.VR & BASIC-NPSY, UniVR"
+font-family: 'Serif'
 output:
-  ioslides_presentation:
-    incremental: true
-    widescreen: true
+  ioslides_presentation: 
+    incremental: yes
+    df_print: paged
+    logo: logo.jpeg
+css: mystyle.css
 bibliography: biblio.bib
 runtime: shiny
 ---
@@ -17,26 +21,73 @@ runtime: shiny
 # 
 # Licenza afl-3.0
 
-
+library(DT)
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+<div class="header">
+  30/04/2021 $2^{nd}$ SNACK SIPF -
+  Guida Bayesiana per Autostoppisti
+</div>
+<div class="footer">
+  M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR
+</div>
 
 ## Cosa è la statistica Bayesiana?
 
 - Le origini: Bayes & Laplace
 - $P(\theta|D) \propto P(D|\theta) \times P(\theta)$
-- Distribuzione a priori $P(\theta)$ p $P(H)$:
+- Distribuzione a priori $P(\theta)$ o $P(H)$:
+
   distribuzione di probabilità dell'ipotesi o dei parametri
   in forma di distribuzione dei dati.
+  
   _Come credo saranno distribuiti i dati._
+  
 - Funzione di verosomiglianza (likelihood) $P(D|\theta)$ o $P(D|H)$:
+
   distribuzione di probabilità dei dati tramite modello.
-  _Come sono realmente distribuiti i dati._
+  
+  _Come sono realmente distribuiti i dati secondo la distribuzione scelta._
+  
 - Distribuzione a posteriori $P(\theta|D)$ o $P(H|D)$:
+
   distribuzione di probabilità dell'ipotesi o dei parametri dopo
   l'osservazione dei dati.
-  _Come cambia la mia ipotesi di distribuzione dei dati._
   
+  _Come cambia la mia ipotesi di distribuzione dei dati, in seguito alla loro
+   osservazione._
+  
+## Procedimento tipico
+
+
+<div class="box" style="margin-left:5%;font-size:80%;">
+- **Cosa mi aspetto?**
+
+- Distribuzione a-priori.
+- Una differenza di una certa dimensione (effect size).
+- Nessuna ipotesi, priore non-informative o slightly informative.
+  
+* Grafico della distribuzione a priori!
+</div>
+
+<div class="box" style="margin-left:28%;font-size:80%;">
+- **Cosa osservo?**
+
+- Funzione di verosomiglianza.
+- I dati modificano i parametri del modello matematico scelto
+  (i $\beta$ di un modello lineare)
+</div>
+
+<div class="box" style="margin-left:50%;font-size:80%;">
+- **Come cambia la mia aspettativa sui risultati, in seguito alle osservazioni?**
+
+- Distribuzione a posteriori.
+- Vedo che la differenza che mi attendevo è differente da quello
+  che mi aspettavo. Il risultato è una sorta di "media pesata" fra la
+  distribuzione a priori e la funzione di verosomiglianza.
+</div>
+
 ## Un esempio 1/4 - modificato da [@Albert2009]
 
 - Eseguiamo su un singolo partecipante un test composto
@@ -62,7 +113,7 @@ axis(side = 1, at = seq(from = 0, to = 1, by = 0.1),
 - Per ogni prova eseguita
   abbiamo il dato di accuratezza (1 = successo, 0 = fallimento).
 
-- Il nostro partecipante riesce in 10 prove, ma ne sbaglia 10.
+- Il nostro partecipante riesce in 10 prove, ma ne sbaglia 20.
 
 ```{r, fig.height=3}
 successes <- 10##33%
@@ -131,17 +182,103 @@ inputPanel(
 )
 ```
 
+## Una diversa concezione della probabilità
 
-## Bullets
+<div class="columns-2">
+  **Frequentista**
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+  - i parametri delle distribuzioni sono fissi, sono i dati casuali
+  
+  - si basa sull'assunto che l'ipotesi nulla sia vera
+    
+  - p-value ($P_\theta(X = x)$) 
+    rappresenta quanto è raro ottenere il campione osservato
+    da una popolazione statistica sotto $H_0$
+    
+  - l'intervallo di _confidenza_ del 95% indica che la reale media del campione è nel CI il 95% delle volte
 
-## R Output
 
-```{r cars}
-summary(cars)
+  **Bayesiana**
+  
+  - i dati sono fissi, i parametri delle distribuzioni sono variabili
+  
+  - ogni ipotesi può avere una diversa probabilità
+  
+  - la probabilità rappresenta la credibilità che ha una certa
+    ipotesi o certi parametri delle distribuzioni
+    *ossia, rappresenta l'incertezza verso una ipotesi o un parametro*
+    
+  - l'intervallo di _credibilità_ o HDI del 95% indica che il 95% della popolazione è nel CI
+  
+</div>
+
+## Diversi metodi 
+
+```{r}
+
+dat <- data.frame(
+  y = rnorm(100),
+  x = rgamma(100, shape = 1)
+)
+
+datatable( dat , options = list(
+  pageLength = 8
+))
+
+```
+
+## Bayes Factor: Savage-Dickey density ratio
+
+```{r, fig.height=1}
+renderPlot({
+  mean_prior <- as.numeric(input$mp)
+  var_prior  <- as.numeric(input$vp)
+  
+  mean_lik  <- 20
+  var_lik   <- 5
+  
+  var_post  <- 1/(1/var_prior + 1/var_lik)
+  mean_post <- ((1/var_prior)/(1/var_post)) * mean_prior +
+    ((1/var_lik)/(1/var_post)) * mean_lik
+  
+  ## posterior
+  curve(dnorm(x,mean_post,sqrt(var_post)), from=0, to=40,
+        xlab="Punteggio medio",
+        ylab="Density",lty=1,lwd=4, ylim = c(0,0.4),
+        axes = FALSE, col = "red",
+        main = paste("BF10 =",
+                              round(
+                                  dnorm(mean_prior,mean_prior,sqrt(var_prior))/
+                                  dnorm(mean_prior,mean_post,sqrt(var_post)),
+                                2),
+                     " BF01 =",
+                              round(
+                                dnorm(mean_prior,mean_post,sqrt(var_post))/
+                                  dnorm(mean_prior,mean_prior,sqrt(var_prior)),
+                                2)
+                     )
+        )
+  ## likelihood
+  curve(dnorm(x,mean_lik,sqrt(var_lik)),add=TRUE,lty=2,lwd=4,
+        col = "blue")
+  ## prior
+  curve(dnorm(x,mean_prior,sqrt(var_prior)),add=TRUE,lty=3,lwd=4, col = "green")
+  legend(.7,10,c("Prior","Likelihood","Posterior"),
+         lty=c(3,2,1),lwd=c(3,3,3),col=c("green","blue","red"))
+  axis(side = 1, at = seq(from = 0, to = 30, by = 1))
+  abline( v = mean_prior, col = "purple")#line for my "zero"
+  points(x = mean_prior, y = dnorm(mean_prior,mean_prior,sqrt(var_prior)),
+         pch = 19 )
+  points(x = mean_prior, y = dnorm(mean_prior,mean_post,sqrt(var_post)),
+         pch = 19 )
+})
+
+inputPanel(
+  sliderInput("vp", label = "Modifica della varianza del priore:",
+              min = 1, max = 30, value = 5, step = 1),
+  sliderInput("mp", label = "Modifica della media del priore:",
+              min = 1, max = 30, value = 15, step = 1)
+)
 ```
 
 ## References

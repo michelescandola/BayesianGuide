@@ -1,0 +1,41 @@
+.footer {
+    color: black;
+    background: #E8E8E8;
+    position: fixed;
+    top: 95%;
+    text-align:center;
+    font-family: Sans-Serif;
+    width:100%;
+    font-size: large;
+}
+
+.header {
+    color: black;
+    background: #E8E8E8;
+    position: fixed;
+    top: 5%;
+    text-align:center;
+    font-family: Sans-Serif;
+    width:100%;
+    font-size: large;
+}
+
+.box {
+    color: black; background: #E8E8E8;
+    position: fixed;
+    width: 15%;
+}
+
+body {
+ background-image: url("background.jpg");
+ background-color: #cccccc;
+}
+
+slides > slide {
+  width: 80%;
+  height: 80%;
+  left: 35%;
+  top: 45%;
+}
+
+
