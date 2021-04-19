@@ -5,6 +5,6 @@ account: michelescandola
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3931196
-bundleId: 4491261
+bundleId: 4491311
 url: https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/
-when: 1618854954.58746
+when: 1618855618.91516

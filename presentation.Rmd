@@ -1,6 +1,6 @@
 ---
 title: "Guida Bayesiana per Autostoppisti"
-subtitle: "SNACK SIPF 30/04/2021"
+subtitle: "$2^{nd}$ SNACK SIPF 30/04/2021"
 author: "Michele Scandola"
 date: "NPSY-Lab.VR & BASIC-NPSY, UniVR"
 font-family: 'Serif'
@@ -31,6 +31,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Cosa è la statistica Bayesiana?
 
+
+<table>
+<tr>
+<td>
+![](logo.jpeg)
+</td>
+<td>
 - Le origini: Bayes & Laplace
 - $P(\theta|D) \propto P(D|\theta) \times P(\theta)$
 - Distribuzione a priori $P(\theta)$ o $P(H)$:
@@ -55,6 +62,10 @@ knitr::opts_chunk$set(echo = FALSE)
     l'osservazione dei dati. <br>
     _Compromesso fra la mia aspettativa e i dati osservati._
   </blockquote>
+  
+</td>
+</tr>
+</table>
    
 ## Perché usarla?
 
@@ -861,6 +872,7 @@ Soprattutto nel caso dell'uso di Bayes Factor.
 </table>
 
 </center>
+
   
 ## Grazie a tutti per l'attenzione!
 
@@ -870,11 +882,12 @@ Soprattutto nel caso dell'uso di Bayes Factor.
 
 - Questions?
 
-`r fa("envelope", fill = "steelblue")` michele.scandola\@univr.it <br>
+<div class = "box" style="margin-left:36%;font-size:60%;">
+`r fa("envelope", fill = "steelblue")`<a href="mailto:michele.scandola@univr.it">michele.scandola\@univr.it</a><br>
 `r fa("twitter", fill = "steelblue")` \@Scandle <br>
 `r fa("globe", fill = "steelblue")` https://michelescandola.netlify.app/ <br>
 `r fa("github", fill = "steelblue")` https://github.com/michelescandola
-
+</div>
 </center>
 
 ## References
