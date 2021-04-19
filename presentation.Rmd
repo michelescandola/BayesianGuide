@@ -210,7 +210,7 @@ renderPlot({
   curve(dbeta(x,a0+successes,b0+failures), from=0, to=1,
         xlab="percentuale di successo",
         ylab="Density",lty=1,lwd=4, ylim = c(0,10),
-        axes = FALSE, col = "red")
+        axes = FALSE, col = "red", xlim = c(0,1))
   ## likelihood
   curve(dbeta(x,successes+1,failures+1),add=TRUE,lty=2,lwd=4,
         col = "blue")
@@ -238,13 +238,13 @@ renderPlot({
   b0 <- 2
   
   successes <- as.numeric(input$s)##33%
-  failures  <- 20##77%
+  failures  <- 30-successes##77%
   
   ## posterior
   curve(dbeta(x,a0+successes,b0+failures), from=0, to=1,
         xlab="percentuale di successo",
         ylab="Density",lty=1,lwd=4, ylim = c(0,10),
-        axes = FALSE, col = "red")
+        axes = FALSE, col = "red", xlim = c(0,1))
   ## likelihood
   curve(dbeta(x,successes+1,failures+1),add=TRUE,lty=2,lwd=4,
         col = "blue")
