@@ -33,7 +33,8 @@ knitr::opts_chunk$set(echo = FALSE)
   Guida Bayesiana per Autostoppisti
 </div>
 <div class="footer">
-  M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR
+  M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR <br>
+  ciao ciao
 </div>
 
 ## Cosa è la statistica Bayesiana?
