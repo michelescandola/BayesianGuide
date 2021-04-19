@@ -5,9 +5,10 @@ author: "Michele Scandola"
 date: "NPSY-Lab.VR & BASIC-NPSY, UniVR"
 font-family: 'Serif'
 output:
-  ioslides_presentation: 
+  slidy_presentation: 
     incremental: yes
     logo: logo.jpeg
+    footer: "30/04/2021 $2^{nd}$ SNACK SIPF - Guida Bayesiana per Autostoppisti - M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR - https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/"
 css: mystyle.css
 bibliography: biblio.bib
 runtime: shiny
@@ -27,15 +28,6 @@ library(HDInterval)
 library(bayesplot)
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
-<div class="header">
-  30/04/2021 $2^{nd}$ SNACK SIPF -
-  Guida Bayesiana per Autostoppisti
-</div>
-<div class="footer">
-  M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR <br>
-  https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/
-</div>
 
 ## Cosa è la statistica Bayesiana?
 
@@ -94,7 +86,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * *Grafico della distribuzione a priori!*
 </div>
 
-<div class="box" style="margin-left:28%;font-size:80%;">
+<div class="box" style="margin-left:35%;font-size:80%;">
 - **Cosa osservo?**
 
 - Funzione di verosomiglianza.
@@ -102,7 +94,7 @@ knitr::opts_chunk$set(echo = FALSE)
   (i $\beta$ di un modello lineare)
 </div>
 
-<div class="box" style="margin-left:50%;font-size:80%;">
+<div class="box" style="margin-left:70%;font-size:80%;">
 - **Come cambia la mia aspettativa sui risultati, in seguito alle osservazioni?**
 
 - Distribuzione a posteriori.
@@ -857,11 +849,11 @@ Soprattutto nel caso dell'uso di Bayes Factor.
     <td>
       ![](kruschke_book.jpg){height=500px}
       </td>
-      <td>&&nbsp;</td>
+      <td>&nbsp;</td>
       <td>
         ![](rethinking.png){height=500px}
     </td>
-    <td>&&nbsp;</td>
+    <td>&nbsp;</td>
     <td>
         ![](BDA3.jpg){height=500px}
     </td>
