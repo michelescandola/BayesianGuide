@@ -375,6 +375,17 @@ sidebarPanel(
 renderPlot({
   old.par <- par()
   
+  f <- function(x)
+        0.3 * dnorm(x, mean = 90, sd = 20) +
+        0.1 * dnorm(x, mean = 65, sd = 20) +
+        0.4 * dnorm(x, mean = 30, sd = 10) +
+        0.2 * dnorm(x, mean = 150, sd = 10) 
+
+  dat <- c(rnorm(300, mean = 90, sd = 20),
+           rnorm(100, mean = 65, sd = 20),
+           rnorm(400, mean = 30, sd = 10),
+           rnorm(200, mean = 150, sd = 10))
+  
   n <- as.numeric(input$N)
   
   myMCMC_step <- function(old_point, density_function){
@@ -391,10 +402,11 @@ renderPlot({
       }
   }
   
+  set.seed( 5 )
+  
   x1 <- 95
   
   for(i in 2:5000){
-    set.seed( i )
     x1 <- c( x1, myMCMC_step(x1[i-1] , f ) )
   }
   
@@ -835,6 +847,28 @@ Soprattutto nel caso dell'uso di Bayes Factor.
 
 - Richiesta di provare con priori diversi, solitamente con varianza più
   ampia, per vedere se il risultato qualitativamente regge.
+  
+## Suggested books
+
+<center>
+
+<table>
+  <tr>
+    <td>
+      ![](kruschke_book.jpg){height=500px}
+      </td>
+      <td>&&nbsp;</td>
+      <td>
+        ![](rethinking.png){height=500px}
+    </td>
+    <td>&&nbsp;</td>
+    <td>
+        ![](BDA3.jpg){height=500px}
+    </td>
+  </tr>
+</table>
+
+</center>
   
 ## Grazie a tutti per l'attenzione!
 

@@ -36,6 +36,7 @@ slides > slide {
   height: 80%;
   left: 35%;
   top: 45%;
+  overflow-y: auto !important;
 }
 
 .tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;margin:0px auto;}
