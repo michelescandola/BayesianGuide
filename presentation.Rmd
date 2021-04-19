@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 <div class="footer">
   M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR <br>
-  ciao ciao
+  https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/
 </div>
 
 ## Cosa è la statistica Bayesiana?
@@ -339,7 +339,7 @@ inputPanel(
 * Miglior stima dei parametri
 * Monte Carlo Markov Chains con Gibbs' Sampling, Hamiltonian Markov Chains
 * "New Statistics" [@Kruschke2014; @Cumming2014; @Kruschke2018]
-* "Empirical" Bayes [@gelman2013bayesian]
+* "Empirical" Bayes
 
 ## Monte Carlo Markov Chains 1/3
 
@@ -358,7 +358,7 @@ dat <- c(rnorm(300, mean = 90, sd = 20),
          rnorm(400, mean = 30, sd = 10),
          rnorm(200, mean = 150, sd = 10))
 
-curve(f(x), col="red", -4, 800, n=301, las=1)
+curve(f(x), col="red", -4, 200, n=301, las=1)
 ```
 
 ## Monte Carlo Markov Chains 2/3
@@ -378,7 +378,7 @@ renderPlot({
   n <- as.numeric(input$N)
   
   myMCMC_step <- function(old_point, density_function){
-      new_point <- rnorm(1, mean = old_point, sd = 100)
+      new_point <- rnorm(1, mean = old_point, sd = 50)
       
       ## Acceptance probability:
       alpha <- min(1, density_function(new_point) / density_function(old_point))
@@ -391,12 +391,10 @@ renderPlot({
       }
   }
   
-  
-  set.seed( 5 )
-  
   x1 <- 95
   
   for(i in 2:5000){
+    set.seed( i )
     x1 <- c( x1, myMCMC_step(x1[i-1] , f ) )
   }
   
@@ -404,8 +402,9 @@ renderPlot({
   plot(x = 1:n, y = x1[1:n] , type = "l",
        xlim = c(1, n), ylim = c(min(x1), max(x1)),
        main = paste("Traceplot", n, "iterazioni"))
-  plot(density(x1[1:n]), main = "Sampling distribution", ylim = c(0,0.015))
-  points(density(dat), xlim = c(min(x1),max(x1)), type = "l", lwd = 4, col = "red")
+  plot(density(x1[1:n]), main = "Sampling distribution",
+       ylim = c(0,0.015), xlim = c(-4,200))
+  points(density(dat), type = "l", lwd = 4, col = "red")
   rug(x1[1:n])
   
   par(old.par)
@@ -845,13 +844,11 @@ Soprattutto nel caso dell'uso di Bayes Factor.
 
 - Questions?
 
-</center>
-
 `r fa("envelope", fill = "steelblue")` michele.scandola\@univr.it <br>
 `r fa("twitter", fill = "steelblue")` \@Scandle <br>
 `r fa("globe", fill = "steelblue")` https://michelescandola.netlify.app/ <br>
 `r fa("github", fill = "steelblue")` https://github.com/michelescandola
 
-
+</center>
 
 ## References
