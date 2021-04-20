@@ -370,8 +370,6 @@ curve(f(x), col="red", -4, 200, n=301, las=1)
 sidebarPanel(
   sliderInput("N", label = "Numero di iterazioni della MCMC:",
                 min = 100, max = 5000, value = 100, step = 100),
-  "La linea rossa è la distribuzione da campionare, quella nera
-  il risultato del campionamento.",
   width = 15
 )
 
@@ -421,6 +419,11 @@ renderPlot({
        ylim = c(0,0.015), xlim = c(-4,200))
   points(density(dat), type = "l", lwd = 4, col = "red")
   rug(x1[1:n])
+  legend("topright",
+         lty = c(1,1),
+         col = c("black", "red"),
+         legend =c("Dist. da MCMC", "Dist. originale")
+         )
   
   par(old.par)
 })

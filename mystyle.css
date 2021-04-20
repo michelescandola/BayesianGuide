@@ -37,3 +37,6 @@ blockquote p::before {
 blockquote p::after {
     content: '\201D';
 }
+.shiny-input-container {
+  color: #474747;
+}
