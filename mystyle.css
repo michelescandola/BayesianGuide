@@ -7,6 +7,7 @@
 body {
  background-image: url("background.jpg");
  background-color: #cccccc;
+ color: #FFFFFF;
 }
 
 slides > slide {
@@ -26,6 +27,7 @@ blockquote p {
     padding: 15px;
     background: #eee;
     border-radius: 5px;
+    color: #000000;
 }
 
 blockquote p::before {
