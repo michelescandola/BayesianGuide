@@ -8,7 +8,7 @@ output:
   slidy_presentation: 
     incremental: yes
     logo: logo.jpeg
-    footer: "30/04/2021 $2^{nd}$ SNACK SIPF - Guida Bayesiana per Autostoppisti <br> M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR - https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/"
+    footer: "30/04/2021 $2^{nd}$ SNACK SIPF - Guida Bayesiana per Autostoppisti - M. Scandola, NPsy-Lab.VR, Human Sciences Dept., UniVR - https://michelescandola.shinyapps.io/2021_-_sipf_webinar_bayesian/"
 css: mystyle.css
 bibliography: biblio.bib
 runtime: shiny
