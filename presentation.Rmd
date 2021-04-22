@@ -2,7 +2,7 @@
 title: "Guida Bayesiana per Autostoppisti"
 subtitle: "$2^{nd}$ SNACK SIPF 30/04/2021"
 author: "Michele Scandola"
-date: "NPSY-Lab.VR & BASIC-NPSY, UniVR"
+date: "NPSY-Lab.VR & BASIC-NPSY<br>Dipartimento di Scienze Umane<br>UniVR"
 font-family: 'Serif'
 output:
   slidy_presentation: 
@@ -29,7 +29,17 @@ library(bayesplot)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Cosa è la statistica Bayesiana?
+## Table of topics
+
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. Bayesian Parameter Estimation <br>
+> 3. Bayesian Model Selection <br>
+> 4. Bayesian Model Prediction <br>
+> 5. Indici di affidabilità della statistica Bayesiana <br>
+> 6. Ultimi concetti utili
+
+
+## 1. Cosa è la statistica Bayesiana?
 
 
 <table>
@@ -86,7 +96,6 @@ knitr::opts_chunk$set(echo = FALSE)
   
 ## Procedimento tipico
 
-
 <div class="box" style="margin-left:5%;font-size:80%;">
 - **Cosa mi aspetto?**
 
@@ -97,7 +106,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * *Grafico della distribuzione a priori!*
 </div>
 
-<div class="box" style="margin-left:35%;font-size:80%;">
+<div class="box" style="margin-left:37%;margin-top:5%;font-size:80%;">
 - **Cosa osservo?**
 
 - Funzione di verosomiglianza.
@@ -105,7 +114,7 @@ knitr::opts_chunk$set(echo = FALSE)
   (i $\beta$ di un modello lineare)
 </div>
 
-<div class="box" style="margin-left:70%;font-size:80%;">
+<div class="box" style="margin-left:70%;margin-top:10%;font-size:80%;">
 - **Come cambia la mia aspettativa sui risultati, in seguito alle osservazioni?**
 
 - Distribuzione a posteriori.
@@ -275,33 +284,58 @@ inputPanel(
 
 ## Una diversa concezione della probabilità
 
-<div class="columns-2">
-  **Frequentista**
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-fymr">**Frequentista**</th>
+    <th class="tg-fymr">**Bayesiana**</th>
+  </tr>
+</thead>   
+<tbody>
+  <tr>
+    <td class="tg-0pky1">
+      - i parametri delle distribuzioni sono fissi,
+        sono i dati casuali
+    </td>
+    <td class="tg-0pky2">
+      - i dati sono fissi, i parametri delle distribuzioni sono variabili
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0pky1">
+      - si basa sull'assunto che l'ipotesi nulla sia vera
+    </td>
+    <td class="tg-0pky2">
+      - ogni ipotesi può avere una diversa probabilità
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0pky1">
+      - p-value ($P_\theta(X = x)$) <br>
+        rappresenta quanto è raro ottenere il campione osservato<br>
+        da una popolazione statistica sotto $H_0$
+    </td>
+    <td class="tg-0pky2">
+      - la probabilità rappresenta la credibilità che ha una certa<br>
+        ipotesi o certi parametri delle distribuzioni<br>
+        *ossia, rappresenta l'incertezza verso una ipotesi o un parametro*
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="tg-0pky1">
+      - l'intervallo di _confidenza_ del 95%<br>
+        indica che la reale media del campione è nel<br>
+        CI il 95% delle volte
+    </td>
+    <td class="tg-0pky2">
+      - l'intervallo di _credibilità_ o HDI del 95%<br>
+        indica che il 95% della popolazione è nel CI
+    </td>
+  </tr>
+</tbody>
+</table>
 
-  - i parametri delle distribuzioni sono fissi, sono i dati casuali
-  
-  - si basa sull'assunto che l'ipotesi nulla sia vera
-    
-  - p-value ($P_\theta(X = x)$) 
-    rappresenta quanto è raro ottenere il campione osservato
-    da una popolazione statistica sotto $H_0$
-    
-  - l'intervallo di _confidenza_ del 95% indica che la reale media del campione è nel CI il 95% delle volte
-
-
-  **Bayesiana**
-  
-  - i dati sono fissi, i parametri delle distribuzioni sono variabili
-  
-  - ogni ipotesi può avere una diversa probabilità
-  
-  - la probabilità rappresenta la credibilità che ha una certa
-    ipotesi o certi parametri delle distribuzioni
-    *ossia, rappresenta l'incertezza verso una ipotesi o un parametro*
-    
-  - l'intervallo di _credibilità_ o HDI del 95% indica che il 95% della popolazione è nel CI
-  
-</div>
 
 ## Diversi metodi per diversi obiettivi
 
@@ -335,7 +369,14 @@ inputPanel(
 
 - La lista chiaramente non è esaustiva!
 
-# Bayesian Parameter Estimation
+## Bayesian Parameter Estimation
+
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. **Bayesian Parameter Estimation** <br>
+> 3. Bayesian Model Selection <br>
+> 4. Bayesian Model Prediction <br>
+> 5. Indici di affidabilità della statistica Bayesiana <br>
+> 6. Ultimi concetti utili
 
 ## Bayesian Parameter Estimation
 
@@ -590,7 +631,14 @@ legend("topright",
 ```
 </center>
 
-# Bayesian Model Selection
+## Bayesian Model Selection
+
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. Bayesian Parameter Estimation <br>
+> 3. **Bayesian Model Selection** <br>
+> 4. Bayesian Model Prediction <br>
+> 5. Indici di affidabilità della statistica Bayesiana <br>
+> 6. Ultimi concetti utili
 
 ## Bayes Factor 1/2
 
@@ -678,28 +726,28 @@ $M_1$ e $M_2$.
 </thead>   
 <tbody>
   <tr>
-    <td class="tg-0pky1">Metodo che incorpora la conoscenza passata</td>
-    <td class="tg-0pky2">Dipende pesantemente dal priore</td>
+    <td class="tg-0pky1">- Metodo che incorpora la conoscenza passata</td>
+    <td class="tg-0pky2">- Dipende pesantemente dal priore</td>
   </tr>
   <tr>
-    <td class="tg-0pky1">Indice Bayesiano più conosciuto!</td>
-    <td class="tg-0pky2">A volte visto come surrugato del _p-value_</td>
+    <td class="tg-0pky1">- Indice Bayesiano più conosciuto!</td>
+    <td class="tg-0pky2">- A volte visto come surrugato del _p-value_</td>
   </tr>
   <tr>
-    <td class="tg-0pky1">Dà una interpretazione naturale della probabilità</td>
-    <td class="tg-0pky2">A seconda del metodo di calcolo
-                          bisogna avere alcune cure</td>
+    <td class="tg-0pky1">- Dà una interpretazione naturale della probabilità</td>
+    <td class="tg-0pky2">- A seconda del metodo di calcolo
+                           bisogna avere alcune cure</td>
   </tr>
   <tr>
-    <td class="tg-0pky1">I modelli non necessitano di essere annidati</td>
-    <td class="tg-0pky2">La scelta del priore deve essere accurata
-                        ed è determinante</td>
+    <td class="tg-0pky1">- I modelli non necessitano di essere annidati</td>
+    <td class="tg-0pky2">- La scelta del priore deve essere accurata
+                           ed è determinante</td>
   </tr>
   <tr>
-    <td class="tg-0pky1">Possiamo avere $BF_{12}$ su più indici di
-                          una distribuzione contemporaneamente</td>
-    <td class="tg-0pky2">Se il modello Bayesiano ha dei problemi,
-                          è completamente inaffidabile</td>
+    <td class="tg-0pky1">- Possiamo avere $BF_{12}$ su più indici di
+                            una distribuzione contemporaneamente</td>
+    <td class="tg-0pky2">- Se il modello Bayesiano ha dei problemi,
+                           è completamente inaffidabile</td>
   </tr>
 </tbody>
 </table>
@@ -815,7 +863,14 @@ Bayesiani [@Carlin1995; @Kuo198; @OHara2009],
 - di tipo Bernoulliano o Categoriale,
 - che permettono la selezione fra più modelli concorrenti
 
-# Bayesian Model Prediction
+## Bayesian Model Prediction
+
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. Bayesian Parameter Estimation <br>
+> 3. Bayesian Model Selection <br>
+> 4. **Bayesian Model Prediction** <br>
+> 5. Indici di affidabilità della statistica Bayesiana <br>
+> 6. Ultimi concetti utili
 
 ## Bayesian Model Prediction
 
@@ -829,7 +884,14 @@ ultimamente.
 - Leave-One-Out Cross-Validation [@Vehtari2016]
 
 
-# Indici di correttezza della statistica Bayesiana
+## Indici di affidabilità della statistica Bayesiana
+
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. Bayesian Parameter Estimation <br>
+> 3. Bayesian Model Selection <br>
+> 4. Bayesian Model Prediction <br>
+> 5. **Indici di affidabilità della statistica Bayesiana** <br>
+> 6. Ultimi concetti utili
 
 ## L'indice diagnostico di [@Gelman1992] $\hat{R}$
 
@@ -894,16 +956,25 @@ Soprattutto nel caso dell'uso di Bayes Factor.
 - Richiesta di provare con priori diversi, solitamente con varianza più
   ampia, per vedere se il risultato qualitativamente regge.
   
-# Ultimi concetti utili
+## Ultimi concetti utili
 
-## Bayesian Model Averaging
+> 1. Cosa è la statistica Bayesiana? <br>
+> 2. Bayesian Parameter Estimation <br>
+> 3. Bayesian Model Selection <br>
+> 4. Bayesian Model Prediction <br>
+> 5. Indici di affidabilità della statistica Bayesiana <br>
+> 6. **Ultimi concetti utili**
+
+## Ultimi concetti utili
+
+### Bayesian Model Averaging
 
 - Tecnica che sfrutta BMS o BMP per "pesare" più modelli
 - Obbiettivo: ottenere BPE che tengano conto di tutte le possibilità
 
-## Rasoio di Occam
+### Rasoio di Occam
 
-Spesso usato nella statistica Bayesiana.
+- Spesso usato nella statistica Bayesiana.
 
 - Quando non troviamo un modello "vincente"
   ($\frac{1}{3} < BF_{12} < 3$ o altro)

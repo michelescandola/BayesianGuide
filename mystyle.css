@@ -8,6 +8,8 @@ body {
  background-image: url("background.jpg");
  background-color: #cccccc;
  color: #FFFFFF;
+ background-repeat: no-repeat;
+ background-size: cover;
 }
 
 slides > slide {
@@ -15,7 +17,7 @@ slides > slide {
 }
 
 .tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;margin:0px auto;}
-.tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:0px;color:#002b36;
+.tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:1px;color:#002b36;
   font-family:Arial, sans-serif;font-size:80%;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:0px;color:#fdf6e3;
   font-family:Arial, sans-serif;font-size:80%;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
